@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 use Phalcon\Mvc\Controller;
+
 class HomeController extends controller{
 	//public function indexAction() {
 		
@@ -15,6 +16,10 @@ class HomeController extends controller{
 		//echo "来自控制器的输出";
 		//$this->view->pick("路径一/路径二/.../文件名");
 		//通过这种方式，我们对视图文件的加载更加灵活方便。
+		
+		//$this->view->disable();屏蔽视图的功能
+		//echo "来自控制器的输出";
+		
 		$this->view->pick('/test/yu');
 	}
 	public function varAction() {
@@ -22,7 +27,7 @@ class HomeController extends controller{
 		$this->view->love = "Dou Changxiao";
 	}
 	
-	public function starAction()
+	public function startAction()
 	{
 
 	}

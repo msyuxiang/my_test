@@ -4,7 +4,9 @@ use Phalcon\Mvc\View;
 use Phalcon\Mvc\Application;
 use Phalcon\DI\FactoryDefault;
 use Phalcon\Mvc\Url;
-
+use Phalcon\Session\Adapter\Files as Session;
+use Phalcon\Http\Response\Cookies;
+use Phalcon\Crypt;
 
 try{
 	//注册自动加载器
@@ -33,12 +35,35 @@ try{
 	//注册URL服务
 	$di->set('url', function (){
 		$url = new Url();
-		$url->setBaseUri('/Test1/public/');
+		$url->setBaseUri('/my_test/public/');
 		return $url;
 	});
-//处理请求
-$application =new Application($di);
-echo $application->handle()->getContent();
+	
+	//注册session服务
+	$di->set('session', function () {
+		$session = new Session();
+		$session->start();
+		return $session;
+	});
+	
+	//注册cookie服务
+	$di->set('cookie',function(){
+		$cookie = new Cookies();
+		$cookie->useEncryption(true);//开启了加密
+		return $cookie;
+	});
+	
+	//需要一个加密服务
+	
+	$di->set('crypt',function(){
+		$crypt = new Crypt();
+		$crypt->setKey('#xin8$fp?=x*.ak//j1v#');
+		return $crypt;
+	});
+	//处理请求
+	$application =new Application($di);
+	echo $application->handle()->getContent();
+	
 } catch (Exception $ex) {
 	echo "捕捉到Phalcon异常：", $ex->getMessage();
 }

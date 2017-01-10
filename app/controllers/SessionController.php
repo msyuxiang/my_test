@@ -17,10 +17,10 @@ class SessionController extends Controller{
 	public function saveAction(){
 		//由于我们这里并没有把session这个服务注入di进去，
 		//因此我们必须手工使用session_start()来开启session
-		session_start();
+		//session_start();
 		//这是一个会话数据，存储在session中
 		//它和控制器相关
-		$this->persistent->name = "yuxiang1";
+		$this->persistent->name = "yuxiang1";//来表示这个会话数据
 		var_dump($_SESSION);
 		//output
 		//array(1) { ["SessionController"]=> array(1) { ["name"]=> string(7) "yuxiang" } }
@@ -29,7 +29,7 @@ class SessionController extends Controller{
 	public function fetchAction(){
 		session_start();
 		$name = $this->persistent->name;
-		var_dump($name);
+		var_dump($name);//
 		echo "<br />";
 		var_dump($_SESSION);
 	}
