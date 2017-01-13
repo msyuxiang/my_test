@@ -35,5 +35,9 @@ class HomeController extends controller{
 	public function nameAction(){
 		
 	}
+	
+	public function yuAction(){
+		$this->view->name ="Yu Xiang";
+	}
 }
 

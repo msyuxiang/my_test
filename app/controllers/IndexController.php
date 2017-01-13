@@ -68,5 +68,12 @@ class IndexController extends Controller{
 		echo "This is the content of BE";
 		$this->response->redirect('http://www.baidu.com');
 	}
+	
+	public function addAction(){
+		
+	}
+	public function addCheckAction(){
+	
+	}
 }
 
