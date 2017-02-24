@@ -7,17 +7,16 @@
  */
 
 /**
- * Description of My
+ * Description of Robots
  *
  * @author yo
  */
-
-class My extends \Phalcon\Mvc\Model{
+class Robots extends \Phalcon\Mvc\Model{
 	//put your code here
+	//默认情况下，对应数据表"robots"
 	
-	public $name;
-	public $email;
-	public $password;
-	public $save;
-	public $submit;
+	//手动映射到其他数据表中
+	public function getSource() {
+		return "the_robots";
+	}
 }

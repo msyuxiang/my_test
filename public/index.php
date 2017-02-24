@@ -22,8 +22,8 @@ try{
 	$router->removeExtraSlashes(true);
 	$router->add("/fund/addconfirm",   			array("controller"=>"fund" ,  "action"=>"addConfirm"));
 	$router->add("/fund/addconfirmcheck",   	array("controller"=>"fund" ,  "action"=>"addConfirmCheck"));
-	
-	
+	$router->add("/my/confirm",   			array("controller"=>"my" ,  "action"=>"registerConfirm"));
+
 	//创建一个依赖注入类
 	$di=new FactoryDefault();
 	
@@ -33,7 +33,7 @@ try{
         $view->setViewsDir('../app/views/');
 		//注册了一个引擎，而且文件后缀为".volt"的文件会
 		//使用Engine里面的Volt类去解析
-		$view->registerEngines(['.volt'=>'Phalcon\Mvc\View\Engine\Volt']);
+		//$view->registerEngines(['.volt'=>'Phalcon\Mvc\View\Engine\Volt']);
         return $view;
     };
 	
@@ -65,7 +65,16 @@ try{
 		return $cookie;
 	});
 	
-	//需要一个加密服务
+	//db service
+	$di['db'] = function() {
+        return new DbAdapter(array(
+            "host"     => "localhost",
+            "username" => "root",
+            "password" => "masami914",
+            "dbname"   => "tutorial",
+			"charset"  => "utf8"
+        ));
+    };
 	
 	$di->set('crypt',function(){
 		$crypt = new Crypt();
@@ -74,15 +83,15 @@ try{
 	});
 	
 	//注入数据库服务
-	$di->set('db',function(){
-		return new Phalcon\Db\Adapter\Pdo\Mysql(array(
-			"host"=>"127.0.0.1",
-			"username"=>"root",
-			"password"=>"masami914",
-			"dbname"=>"phalcon",
-			"charset"=>"utf8"
-		));	
-	});
+//	$di->set('db',function(){
+//		return new Phalcon\Db\Adapter\Pdo\Mysql(array(
+//			"host"=>"127.0.0.1",
+//			"username"=>"root",
+//			"password"=>"masami914",
+//			"dbname"=>"phalcon",
+//			"charset"=>"utf8"
+//		));	
+//	});
 	
 	//处理请求
 	$application =new Application($di);

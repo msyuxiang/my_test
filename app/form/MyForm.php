@@ -24,17 +24,25 @@ class MyForm extends Form{
 	 */
 	public function initialize($model, $options){
 		
-		$name = new Text("name", array());
-		$name->setLabel("Name");
+		$name = new Text("name", array("maxlength" => 20, "placeholder" => "Type your name"));
+		$name->setLabel("ユーザー名");
+		$this->add($name);
 		
-		$email = new Text("email", array());
-		$email->setLabel("Email");
+		$email = new Text("email", array("maxlength" => 20, "placeholder" => "Type your email"));
+		$email->setLabel("メールアドレス");
+		$this->add($email);
 		
-		$email = new Password("password", array());
-		$email->setLabel("Password");
+		$password = new Password("password", array("maxlength" => 20, "placeholder" => "Type your password"));
+		$password->setLabel("パスワード");
+		$this->add($password);
+		
+		$save = new Submit("save", array());
+		$save->setLabel("保存");
+		$this->add($save);
 		
 		$submit = new Submit("submit", array());
-		$submit->setLabel("submit");
+		$submit->setLabel("提出");
+		$this->add($submit);
 		
 	}
 }
